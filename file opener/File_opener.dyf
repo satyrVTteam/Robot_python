@@ -1,0 +1,373 @@
+{
+  "Uuid": "fb7fe183-62e0-4819-bcb2-019f99d59709",
+  "IsCustomNode": true,
+  "Category": "Core",
+  "Description": "Open selected file in preselected in the node software",
+  "Name": "File_opener",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "name = IN[0]\r\n\r\nx = name.find('.txt',1)\r\nSPath=[]\r\nif x>0: SPath = str(IN[1])\r\n\r\nx = name.find('.pdf',1)\r\nSPath=[]\r\nif x>0: SPath = str(IN[2])\r\n\r\nx = name.find('.xlsx',1)\r\nSPath=[]\r\nif x>0: SPath = str(IN[3])\r\n\r\n\r\n\r\n\r\n\r\nOUT = SPath\r\n",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "51d62f87714640578dad7d6c9220ca1f",
+      "Inputs": [
+        {
+          "Id": "4ec6aeccf63b422daaa37b7c6cc7fee5",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "864c3f695ffc4c4bb2e7c4662ed271f0",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "15dd19307f3f418e84b9d136ea18ccb3",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "061e9463bfae47a283c0c71cda3b4d6d",
+          "Name": "IN[3]",
+          "Description": "Input #3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3d43d09243c94b94ad0847eded5aeeb5",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nimport os\r\nimport subprocess\r\n#clr.AddReference('ProtoGeometry')\r\n#from Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\n#dataEnteringNode = IN\r\n\r\n# Place your code below this line\r\n\r\n\r\ntxt1 = IN[0]\r\n#txt1 = 'C:\\1.txt'\r\nbool = IN[1]\r\n\r\n\r\n#SPath = r'C:\\Windows\\System32\\notepad.exe'\r\nSPath = str(IN[2])\r\n\r\nif bool:\r\n\tsubprocess.Popen([SPath, txt1])\r\n\r\n#subprocess.Popen('explorer \"C:\\temp\"') #itWorks!\r\n# Assign your output to the OUT variable.\r\n#OUT = 0",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "7c19b71b40e84b889467468d35f432ad",
+      "Inputs": [
+        {
+          "Id": "3a5f639a824a4cafa66c01f11ae09423",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8521c2d30be34bd4859a527582ebcc79",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a70a0d30ab58450dba5f3793db8ab95b",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "08295168dab74ba19ae6d882da4dc694",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "C:\\Windows\\System32\\notepad.exe",
+      "Id": "e3921a910d01451fa680c31c61eea2c8",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d80cc39777274cf29bd91dc115d28f76",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "C:\\Program Files (x86)\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe",
+      "Id": "b1e9012118b7473d955d230155a80e0f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f15632f6ec3944e4a9be0a63585e9313",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "FilePath",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "aab6746ace234ac7ae5059f4e9b25e8a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "701278d224804b4d8b172d2fadaecfb0",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "Run",
+        "TypeName": "bool",
+        "TypeRank": 0,
+        "DefaultValue": "False",
+        "Description": ""
+      },
+      "Id": "2acf9869f16648f9be9343b4554d99cd",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "26a509fb907d494f81fdba6c4080649e",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "C:\\Program Files\\Microsoft Office 15\\root\\office15\\EXCEL.EXE",
+      "Id": "a0a96783363c48378b7ec1daf1053805",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e773e61df2574f6a9a079cbc791ff9fd",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "3d43d09243c94b94ad0847eded5aeeb5",
+      "End": "a70a0d30ab58450dba5f3793db8ab95b",
+      "Id": "c8fc8fc50e7049e387347a895f4402ac"
+    },
+    {
+      "Start": "d80cc39777274cf29bd91dc115d28f76",
+      "End": "864c3f695ffc4c4bb2e7c4662ed271f0",
+      "Id": "7d597245cb9a441dabe0aa0a105ed569"
+    },
+    {
+      "Start": "f15632f6ec3944e4a9be0a63585e9313",
+      "End": "15dd19307f3f418e84b9d136ea18ccb3",
+      "Id": "d0b2cd0c28f54429af9e4a0f719d4311"
+    },
+    {
+      "Start": "701278d224804b4d8b172d2fadaecfb0",
+      "End": "3a5f639a824a4cafa66c01f11ae09423",
+      "Id": "b28327741151490d8fd4ec9ff496a828"
+    },
+    {
+      "Start": "701278d224804b4d8b172d2fadaecfb0",
+      "End": "4ec6aeccf63b422daaa37b7c6cc7fee5",
+      "Id": "940201f2240c4ce3813c25ad69394ce2"
+    },
+    {
+      "Start": "26a509fb907d494f81fdba6c4080649e",
+      "End": "8521c2d30be34bd4859a527582ebcc79",
+      "Id": "d08da49d6d234459b9e205a53b3f7b3a"
+    },
+    {
+      "Start": "e773e61df2574f6a9a079cbc791ff9fd",
+      "End": "061e9463bfae47a283c0c71cda3b4d6d",
+      "Id": "b101bdc7c4b5489e9c9162ea0bbb626c"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.10.1.3976",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Programs to open",
+        "Id": "51d62f87714640578dad7d6c9220ca1f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 752.112292889887,
+        "Y": 587.11201629328707
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File open",
+        "Id": "7c19b71b40e84b889467468d35f432ad",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1005.9149719729941,
+        "Y": 452.54606862965
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Software Path",
+        "Id": "e3921a910d01451fa680c31c61eea2c8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 464.39869682858091,
+        "Y": 571.79063471365919
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "b1e9012118b7473d955d230155a80e0f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 407.26638655661992,
+        "Y": 645.93501132797462
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File path",
+        "Id": "aab6746ace234ac7ae5059f4e9b25e8a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 461.5,
+        "Y": 320.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Bool",
+        "Id": "2acf9869f16648f9be9343b4554d99cd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 461.28359114253374,
+        "Y": 389.26119704751125
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "a0a96783363c48378b7ec1daf1053805",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 403.16979684454896,
+        "Y": 724.84650095789164
+      }
+    ],
+    "Annotations": [],
+    "X": -228.316003444714,
+    "Y": -141.36613497206804,
+    "Zoom": 0.937432296686001
+  }
+}

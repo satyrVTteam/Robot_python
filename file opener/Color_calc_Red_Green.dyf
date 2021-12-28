@@ -1,0 +1,342 @@
+{
+  "Uuid": "ba23ae8e-aaaa-4fc5-b90e-e7d32e86ead9",
+  "IsCustomNode": true,
+  "Category": "Core",
+  "Description": "",
+  "Name": "Color_calc_Red_Green",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Logic.If, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "962af06c428844ae8e322f33a8e15ca8",
+      "Inputs": [
+        {
+          "Id": "f234360acf994f309fbbfed6badd5032",
+          "Name": "test",
+          "Description": "Test block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "059155b60cd34efb8348d10f62aff231",
+          "Name": "true",
+          "Description": "True block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e48f9ff8f3994ae6ba72494794b93da3",
+          "Name": "false",
+          "Description": "False block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cd25b4aa29e54a0c98d3807b82fada20",
+          "Name": "result",
+          "Description": "result",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Conditional statement"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Users\\64210\\Dropbox (SMC Design Studio)\\SMC Design Studio Team Folder\\Jobs\\morgans valley 32\\Calculations\\Pergola\\dynamo_t\\red.jpg",
+      "InputValue": ".\\red.jpg",
+      "NodeType": "ExtensionNode",
+      "Id": "2fe66e342a4c4e0db894871ea7d1a183",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "778a9bb978e84caab3de76942fc942dc",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.IO.Image.ReadFromFile@var",
+      "Id": "36783947aaf049c2be00c22f2872901e",
+      "Inputs": [
+        {
+          "Id": "7a83a9d1e5174ba483d559360957d14a",
+          "Name": "file",
+          "Description": "File object to load image from.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "281ffb232a6946a2bb101acd74438334",
+          "Name": "image",
+          "Description": "Image",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Loads the file as a bitmap.\n\nImage.ReadFromFile (file: var): var"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.FileObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "2c1860463c78475a9731189973dc9312",
+      "Inputs": [
+        {
+          "Id": "a2e7eca7be0e423fbe8de5e044dacddb",
+          "Name": "path",
+          "Description": "Path to the file.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "56bd95cc41b0443db87b2ea19a79cdd7",
+          "Name": "file",
+          "Description": "File object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a file object from a path."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Users\\64210\\Dropbox (SMC Design Studio)\\SMC Design Studio Team Folder\\Jobs\\morgans valley 32\\Calculations\\Pergola\\dynamo_t\\green.jpg",
+      "InputValue": ".\\green.jpg",
+      "NodeType": "ExtensionNode",
+      "Id": "311d3a46272b40c2af6d435c92a4b7d2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5e35aab1bf4b4a64a4bc52c5a7da63fe",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "test",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "19a239fe95324f519efddf41b4817623",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a3d453e3ed3f4049a8f6f25f395a4539",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "image",
+      "Id": "25f39f2d290b4bbfafeca677d3973411",
+      "Inputs": [
+        {
+          "Id": "4235085eba544395b282ef395cc09aac",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "cd25b4aa29e54a0c98d3807b82fada20",
+      "End": "a2e7eca7be0e423fbe8de5e044dacddb",
+      "Id": "56066fdf728241ea9bef7d9b6e9dd35d"
+    },
+    {
+      "Start": "778a9bb978e84caab3de76942fc942dc",
+      "End": "e48f9ff8f3994ae6ba72494794b93da3",
+      "Id": "25501a8319954086bc85cd473b64015a"
+    },
+    {
+      "Start": "281ffb232a6946a2bb101acd74438334",
+      "End": "4235085eba544395b282ef395cc09aac",
+      "Id": "d0c40cda14e24cf1b0f1768b0bf3b8a7"
+    },
+    {
+      "Start": "56bd95cc41b0443db87b2ea19a79cdd7",
+      "End": "7a83a9d1e5174ba483d559360957d14a",
+      "Id": "9c7d3928438f4d2cba28a1b54048e622"
+    },
+    {
+      "Start": "5e35aab1bf4b4a64a4bc52c5a7da63fe",
+      "End": "059155b60cd34efb8348d10f62aff231",
+      "Id": "c3199f1d864647a380731ccb1fe9a2ae"
+    },
+    {
+      "Start": "a3d453e3ed3f4049a8f6f25f395a4539",
+      "End": "f234360acf994f309fbbfed6badd5032",
+      "Id": "1f86fcdd5a8e413da4ecc8d8c08a9883"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.6.0.8481",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "If",
+        "Id": "962af06c428844ae8e322f33a8e15ca8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 447.40888935983094,
+        "Y": 5.2402027055340454
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "2fe66e342a4c4e0db894871ea7d1a183",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 292.200550202587,
+        "Y": 196.53839505522006
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Image.ReadFromFile",
+        "Id": "36783947aaf049c2be00c22f2872901e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 745.30160313906,
+        "Y": 2.974804481207002
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File From Path",
+        "Id": "2c1860463c78475a9731189973dc9312",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 625.08536289616,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "311d3a46272b40c2af6d435c92a4b7d2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 250.0,
+        "Y": 74.603149112892027
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "19a239fe95324f519efddf41b4817623",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 0.0,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "25f39f2d290b4bbfafeca677d3973411",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 994.30160313906,
+        "Y": 0.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}

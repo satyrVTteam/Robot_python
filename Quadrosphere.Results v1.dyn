@@ -1,0 +1,606 @@
+{
+  "Uuid": "2274096c-0a79-446d-9718-daa550292a3e",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "Quadrosphere.Results v1",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "dd7d79c988d04cf4b6caaf41d7b0e266",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fb4d861807b943a4bfa0de80ae4f8a70",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nfrom System import Environment\r\nuser = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)\r\nclr.AddReferenceToFileAndPath(IN[0])#or r\"C:\\Users\\64210\\AppData\\Roaming\\Dynamo\\Dynamo Core\\2.6\\packages\\Structural Analysis for Dynamo\\bin\\RSA\\Interop.RobotOM.dll\"\r\nfrom RobotOM import *\r\nfrom System import Object\r\n#from math import *\r\n#from itertools import compress\r\n\r\n#vars for robot\r\napp = RobotApplicationClass()\r\n#force_serv = IRobotBarForceServer\r\nproject = app.Project\r\nstructure = project.Structure\r\nforce_serv = structure.Results.Bars.Forces\r\n#labels = structure.Labels\r\n#loads = structure.Cases\r\n#ProjectPrefs = project.Preferences\r\nbar_col = structure.Bars.GetAll()\r\n#objects = structure.Objects\r\n#nodes = structure.Nodes\r\n#cases = structure.Cases.GetAll()\r\n\r\n_x0 = []\r\n_y0 = []\r\n_z0 = []\r\n\r\n_x1 = []\r\n_y1 = []\r\n_z1 = []\r\n\r\nif IN[1]:\r\n\tfor i in range(1,bar_col.Count+1):\r\n\t\tbar = bar_col.Get(i)\r\n\t\tbar_num = bar.Number\r\n\t\tdata0 = force_serv.Value(bar_num,3, 0) #last number is a section of a bar at a relative distance\r\n\t\tres_fy0 = data0.FY\r\n\t\tres_fx0 = data0.FX\r\n\t\tres_fz0 = data0.FZ\r\n\t\t\r\n\t\t_x0.append(res_fx0)\r\n\t\t_y0.append(res_fy0)\r\n\t\t_z0.append(res_fz0)\r\n \r\n\t\tdata1 = force_serv.Value(bar_num,3, 1) #last number is a section of a bar at a relative distance\r\n\t\tres_fy1 = data1.FY\r\n\t\tres_fx1 = data1.FX\r\n\t\tres_fz1 = data1.FZ\r\n\t\t\r\n\t\t_x1.append(res_fx0)\r\n\t\t_y1.append(res_fy0)\r\n\t\t_z1.append(res_fz0) \r\n \r\n\tOUT = _x0,_y0,_z0,_x1,_y1,_z1\r\n\t\r\n\t\r\n\t\r\nelse: OUT = \"turn the switch ON\"",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "45666219b98c463d86c16947c08e2f82",
+      "Inputs": [
+        {
+          "Id": "5f2f5cb1c5bf4cec94b46007152bdfb0",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5464e35a6f8a45ecbfe7b83d49dc2039",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "beac5f1528774de691b68381e6bbeff4",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0e48a624ac974b6ca3656b4ef9c2737b",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "C:\\Users\\64210\\AppData\\Roaming\\Dynamo\\Dynamo Core\\2.6\\packages\\Structural Analysis for Dynamo\\bin\\RSA\\Interop.RobotOM.dll",
+      "Id": "66f7b4520c6f477c857bedb03dd23834",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5316076f95894d0c87324ecd1f47e1a6",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "data = IN[0]\r\n\r\nfxmax = max(max(data[0]),max(data[3]))\r\nfxmin = min(min(data[0]),min(data[3]))\r\n\r\niXmax = data[0].index(fxmax),data[3].index(fxmax)\r\niXmin = data[0].index(fxmin),data[3].index(fxmin)\r\n\r\n\r\nOUT = \"Fx max, Fx min\",[fxmax, fxmin],\"element numbers, mind+1\", [iXmax,iXmin]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "a615aa30357f4bbaa0502fe913a52792",
+      "Inputs": [
+        {
+          "Id": "29e208078249438bbe524723026717bf",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "51f8835e11214bb89495bddfef008e5e",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "data = IN[0]\r\n\r\nfxmax = max(max(data[2]),max(data[5]))\r\nfxmin = min(min(data[2]),min(data[5]))\r\n\r\n\r\niXmax = data[2].index(fxmax),data[5].index(fxmax)\r\niXmin = data[2].index(fxmin),data[5].index(fxmin)\r\n\r\n\r\nOUT = \"Fz max, Fz min\",[fxmax, fxmin],\"element numbers, mind+1\", [iXmax,iXmin]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "1452b0fb39be4ef1a9d637d6d8d1be2b",
+      "Inputs": [
+        {
+          "Id": "0cda6f51babf47e09389b53283e581b1",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f87e080705464734a20e9cff30ed9491",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "\r\nforces = IN[0]\r\nd = IN[1]\r\nindexes = d[3]\r\nff = list(set(indexes[0])),list(set(indexes[1]))\r\nmm = ff[0][0],ff[1][0]\r\ntext = [\"x0\",\"y0\",\"z0\",\"x1\",\"y1\",\"z1\"]\r\nbar_n = IN[2]\r\nt2 = [\"Max tension force!\", \"Max compression force!\"]\r\n\r\n\r\nt = []\r\noutp = []\r\n\r\nfor j in range(len(mm)):\r\n\toutp = []\r\n\toutp.append(\"Bar number in Robot: \" + str(bar_n[mm[j]]))\t\r\n\toutp.append(t2[j])\r\n\tfor i in range(len(forces)):\t\r\n\t\tforce =round(forces[i][int(mm[j])]/10)*10/1000 \t\r\n\t\toutp.append(text[i] +\" : \" +  str(force)+ \" kN\")\r\n\tt.append(outp)\r\n\t\r\n\t\r\nOUT = t\r\n\r\n",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "1c39d2c360534265a144dbf4731e0e11",
+      "Inputs": [
+        {
+          "Id": "52e7905b4e854ada8458d99256bf13f4",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "75485ce8c6ae4a58a4803f78bc75131e",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b4c120ed17d745bd8f208de3111f72cc",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dd14cbeb53de4f14bbbe5374c0e71f22",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nfrom System import Environment\r\nuser = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)\r\nclr.AddReferenceToFileAndPath(IN[0])#or r\"C:\\Users\\64210\\AppData\\Roaming\\Dynamo\\Dynamo Core\\2.6\\packages\\Structural Analysis for Dynamo\\bin\\RSA\\Interop.RobotOM.dll\"\r\nfrom RobotOM import *\r\nfrom System import Object\r\n#from math import *\r\n#from itertools import compress\r\n\r\n#vars for robot\r\napp = RobotApplicationClass()\r\n#force_serv = IRobotBarForceServer\r\nproject = app.Project\r\nstructure = project.Structure\r\nforce_serv = structure.Results.Bars.Forces\r\n#labels = structure.Labels\r\n#loads = structure.Cases\r\n#ProjectPrefs = project.Preferences\r\nbars = structure.Bars\r\nbar_col = structure.Bars.GetAll()\r\n#objects = structure.Objects\r\n#nodes = structure.Nodes\r\n#cases = structure.Cases.GetAll()\r\n\r\n\r\n_x0 = []\r\n_y0 = []\r\n_z0 = []\r\n\r\n_x1 = []\r\n_y1 = []\r\n_z1 = []\r\n\r\nbarz = []\r\n\r\nif IN[1]:\r\n\tfor i in range(1,bar_col.Count+1):\r\n\t\tbar = bar_col.Get(i)\r\n\t\tbar_num = bar.Number\r\n\t\tdata0 = force_serv.Value(bar_num,3, 0) #last number is a section of a bar at a relative distance\r\n\t\tres_fy0 = data0.FY\r\n\t\tres_fx0 = data0.FX\r\n\t\tres_fz0 = data0.FZ\r\n\t\t\r\n\t\t_x0.append(bar_num)\r\n\t\t_x0.append(res_fx0)\r\n\t\t_y0.append(res_fy0)\r\n\t\t_z0.append(res_fz0)\r\n \r\n\t\tdata1 = force_serv.Value(bar_num,3, 1) #last number is a section of a bar at a relative distance\r\n\t\tres_fy1 = data1.FY\r\n\t\tres_fx1 = data1.FX\r\n\t\tres_fz1 = data1.FZ\r\n\t\t\r\n\t\t_x1.append(res_fx0)\r\n\t\t_y1.append(res_fy0)\r\n\t\t_z1.append(res_fz0) \r\n\t\tbarz.append(bar_num)\r\n \r\n\tOUT = barz\r\n\t\r\n\t\r\n\t\r\nelse: OUT = \"turn the switch ON\"",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "c594bc315f9f49928eb434d3c04518db",
+      "Inputs": [
+        {
+          "Id": "b20b7f4f62ee4f37b86811a430555823",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cc5abb398eaa425fba831a0dd9f4194d",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "95dcd0d878fc422f8f7a763367d47ee8",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "\r\nforces = IN[0]\r\nd = IN[1]\r\nindexes = d[3]\r\nff = list(set(indexes[0])),list(set(indexes[1]))\r\nmm = ff[0][0],ff[1][0]\r\ntext = [\"x0\",\"y0\",\"z0\",\"x1\",\"y1\",\"z1\"]\r\nbar_n = IN[2]\r\nt2 = [\"Max Z value force!\", \"Min Z value force!\"]\r\n\r\n\r\nt = []\r\noutp = []\r\n\r\nfor j in range(len(mm)):\r\n\toutp = []\r\n\toutp.append(\"Bar number in Robot: \" + str(bar_n[mm[j]]))\t\r\n\toutp.append(t2[j])\r\n\tfor i in range(len(forces)):\t\r\n\t\tforce =round(forces[i][int(mm[j])]/10)*10/1000 \t\r\n\t\toutp.append(text[i] +\" : \" +  str(force)+ \" kN\")\r\n\tt.append(outp)\r\n\t\r\n\t\r\nOUT = t\r\n\r\n",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "94b79aecc0264b13a97e5471a1280297",
+      "Inputs": [
+        {
+          "Id": "5d3aa58797d942829b0cbe79525fd82f",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ce075cc3674c49548e6aa5b5de9bb016",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7f9e350255c64081939818fcf9a18cca",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d64c3d3563b645678ae9c76c4d153d3c",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "9916486e4a074f069a2d8661140c47d7",
+      "Inputs": [
+        {
+          "Id": "a8fb270278fb4614b8c00ee05425caa5",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "df9deb36937546a5bd35ac17e7aea415",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "60dc0900ccc548fc87485e56915d13da",
+      "Inputs": [
+        {
+          "Id": "5768ceb5f94040ec992443e209077bab",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d294f8b397f24570a87f609ce9415df1",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "fb4d861807b943a4bfa0de80ae4f8a70",
+      "End": "5464e35a6f8a45ecbfe7b83d49dc2039",
+      "Id": "dda2789a1b394d2d9ab6c8ebd06533ad"
+    },
+    {
+      "Start": "fb4d861807b943a4bfa0de80ae4f8a70",
+      "End": "cc5abb398eaa425fba831a0dd9f4194d",
+      "Id": "b3097dbe29ab40c68f39028e0c294672"
+    },
+    {
+      "Start": "0e48a624ac974b6ca3656b4ef9c2737b",
+      "End": "29e208078249438bbe524723026717bf",
+      "Id": "156b13500d334e5ca414a4b45c857605"
+    },
+    {
+      "Start": "0e48a624ac974b6ca3656b4ef9c2737b",
+      "End": "0cda6f51babf47e09389b53283e581b1",
+      "Id": "027630af6a9f44aa998f7f5b62146eb8"
+    },
+    {
+      "Start": "0e48a624ac974b6ca3656b4ef9c2737b",
+      "End": "52e7905b4e854ada8458d99256bf13f4",
+      "Id": "0ac40901b68047d5b8b21440cd8abe5b"
+    },
+    {
+      "Start": "0e48a624ac974b6ca3656b4ef9c2737b",
+      "End": "5d3aa58797d942829b0cbe79525fd82f",
+      "Id": "812ea696988b450bab6d4f39d2754c3b"
+    },
+    {
+      "Start": "5316076f95894d0c87324ecd1f47e1a6",
+      "End": "5f2f5cb1c5bf4cec94b46007152bdfb0",
+      "Id": "44bcd6b0d1a14b85885ff2ae866a3798"
+    },
+    {
+      "Start": "5316076f95894d0c87324ecd1f47e1a6",
+      "End": "b20b7f4f62ee4f37b86811a430555823",
+      "Id": "2f159e320b0a4aa5b06ab5d6f5f85636"
+    },
+    {
+      "Start": "51f8835e11214bb89495bddfef008e5e",
+      "End": "75485ce8c6ae4a58a4803f78bc75131e",
+      "Id": "439e534cb98545b78383c680347381e7"
+    },
+    {
+      "Start": "f87e080705464734a20e9cff30ed9491",
+      "End": "ce075cc3674c49548e6aa5b5de9bb016",
+      "Id": "ff04b9f131204ce08eac956bb9aae669"
+    },
+    {
+      "Start": "dd14cbeb53de4f14bbbe5374c0e71f22",
+      "End": "a8fb270278fb4614b8c00ee05425caa5",
+      "Id": "424a687801ff4a1b932694240cfbb7ae"
+    },
+    {
+      "Start": "95dcd0d878fc422f8f7a763367d47ee8",
+      "End": "b4c120ed17d745bd8f208de3111f72cc",
+      "Id": "5afe15fd587f41a6acd8038bf636e45b"
+    },
+    {
+      "Start": "95dcd0d878fc422f8f7a763367d47ee8",
+      "End": "7f9e350255c64081939818fcf9a18cca",
+      "Id": "064ff14222a64e5f987e47b24269d631"
+    },
+    {
+      "Start": "d64c3d3563b645678ae9c76c4d153d3c",
+      "End": "5768ceb5f94040ec992443e209077bab",
+      "Id": "6229b45d5a784cadb4d7cd82e9b0f69d"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.10.1.3976",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Run",
+        "Id": "dd7d79c988d04cf4b6caaf41d7b0e266",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 674.317362537819,
+        "Y": 643.39961439890044
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "get results",
+        "Id": "45666219b98c463d86c16947c08e2f82",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 911.5920749511489,
+        "Y": 546.72667824221026
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Robot library address, change version",
+        "Id": "66f7b4520c6f477c857bedb03dd23834",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 412.0,
+        "Y": 498.00000000000023
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "get the max Fx",
+        "Id": "a615aa30357f4bbaa0502fe913a52792",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1203.0,
+        "Y": 320.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "get the max Fz",
+        "Id": "1452b0fb39be4ef1a9d637d6d8d1be2b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1215.6730017974046,
+        "Y": 907.01210668948693
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "all forces in a bar",
+        "Id": "1c39d2c360534265a144dbf4731e0e11",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1557.9743328988425,
+        "Y": 312.97495559125633
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "bar numbers",
+        "Id": "c594bc315f9f49928eb434d3c04518db",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 911.71127591619552,
+        "Y": 1023.8787183845964
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "all forces in a bar",
+        "Id": "94b79aecc0264b13a97e5471a1280297",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1576.5425626870363,
+        "Y": 895.53102557339741
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "9916486e4a074f069a2d8661140c47d7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1807.4662751574961,
+        "Y": 241.01627804344173
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "60dc0900ccc548fc87485e56915d13da",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1902.9491036441473,
+        "Y": 889.43697077096
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "68274f3afd244d5090413d3562255e37",
+        "Title": "max Fx",
+        "Nodes": [
+          "a615aa30357f4bbaa0502fe913a52792",
+          "1c39d2c360534265a144dbf4731e0e11",
+          "9916486e4a074f069a2d8661140c47d7"
+        ],
+        "Left": 1193.0,
+        "Top": 188.01627804344173,
+        "Width": 889.466275157496,
+        "Height": 431.0,
+        "FontSize": 36.0,
+        "InitialTop": 241.01627804344173,
+        "InitialHeight": 223.98372195655827,
+        "TextblockHeight": 43.0,
+        "Background": "#FFA4E1FF"
+      },
+      {
+        "Id": "16c9f343ee904520b427c6c1975bd238",
+        "Title": "max Fz",
+        "Nodes": [
+          "1452b0fb39be4ef1a9d637d6d8d1be2b",
+          "94b79aecc0264b13a97e5471a1280297",
+          "60dc0900ccc548fc87485e56915d13da"
+        ],
+        "Left": 1205.6730017974046,
+        "Top": 836.43697077096,
+        "Width": 972.27610184674268,
+        "Height": 431.0,
+        "FontSize": 36.0,
+        "InitialTop": 889.43697077096,
+        "InitialHeight": 162.57513591852694,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFC999"
+      }
+    ],
+    "X": -675.80476907381444,
+    "Y": -246.19961571182978,
+    "Zoom": 0.78510673638478656
+  }
+}
